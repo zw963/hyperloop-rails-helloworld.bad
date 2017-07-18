@@ -18,18 +18,20 @@ class Helloworld < Hyperloop::Component
     # cleanup any thing (i.e. timers) before component is destroyed
   end
 
+  state :show_field, false
+
   render(DIV) do
     show_button
     DIV(class: 'formdiv') do
       show_input
       show_text
-    end
+    end if state.show_field
   end
 
   def show_button
     BUTTON(class: 'btn btn-info') do
       'Toggle button'
-    end
+    end.on(:click) { mutate.show_field(!state.show_field) }
   end
 
   def show_input
