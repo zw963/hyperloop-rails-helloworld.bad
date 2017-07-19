@@ -21,7 +21,7 @@ class Helloworld < Hyperloop::Component
     show_button
     if MyStore.show_field
       DIV(class: 'formdiv') do
-        show_input
+        InputBox()
         show_text
       end
     end
@@ -40,17 +40,6 @@ class Helloworld < Hyperloop::Component
     # evt.prevent_default
     logo =Element['img']
     MyStore.show_field ? logo.hide('slow') : logo.show('slow')
-  end
-
-  def show_input
-    H4 do
-      SPAN { 'Please type ' }
-      SPAN(class: 'colored') { 'Hello World' }
-      SPAN { ' in the input field below :' }
-      BR {}
-      SPAN { 'Or anything you want (^̮^)' }
-    end
-    INPUT(type: :text, class: 'form-control').on(:change) {|e| MyStore.mutate.field_value(e.target.value) }
   end
 
   def show_text
