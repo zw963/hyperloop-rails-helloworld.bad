@@ -32,13 +32,12 @@ class Helloworld < Hyperloop::Component
   def show_button
     BUTTON(class: 'btn btn-info') do
       'Toggle button'
-    end.on(:click) do |evt|
-      MyStore.toggle_field
-      toggle_logo(evt)
+    end.on(:click) do |ev|
+      ShowButtonOp.run(ev: ev)
     end
   end
 
-  def toggle_logo(_evt)
+  def self.toggle_logo(_evt)
     # evt.prevent_default
     logo =Element['img']
     MyStore.show_field ? logo.hide('slow') : logo.show('slow')
