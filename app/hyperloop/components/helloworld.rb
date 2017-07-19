@@ -17,12 +17,9 @@ class Helloworld < Hyperloop::Component
     # cleanup any thing (i.e. timers) before component is destroyed
   end
 
-  state show_field: false
-  state field_value: ''
-
   render(DIV) do
     show_button
-    if state.show_field
+    if MyStore.show_field
       DIV(class: 'formdiv') do
         show_input
         show_text
@@ -34,7 +31,7 @@ class Helloworld < Hyperloop::Component
     BUTTON(class: 'btn btn-info') do
       'Toggle button'
     end.on(:click) do |evt|
-      mutate.show_field(!state.show_field)
+      MyStore.mutate.show_field(!MyStore.show_field)
       toggle_logo(evt)
     end
   end
@@ -42,7 +39,7 @@ class Helloworld < Hyperloop::Component
   def toggle_logo(evt)
     # evt.prevent_default
     logo =Element['img']
-    state.show_field ? logo.hide('slow') : logo.show('slow')
+    MyStore.show_field ? logo.hide('slow') : logo.show('slow')
   end
 
   def show_input
@@ -53,10 +50,10 @@ class Helloworld < Hyperloop::Component
       BR {}
       SPAN { 'Or anything you want (^̮^)' }
     end
-    INPUT(type: :text, class: 'form-control').on(:change) {|e| mutate.field_value(e.target.value) }
+    INPUT(type: :text, class: 'form-control').on(:change) {|e| MyStore.mutate.field_value(e.target.value) }
   end
 
   def show_text
-    H1 { state.field_value.to_s }
+    H1 { MyStore.state.field_value.to_s }
   end
 end
