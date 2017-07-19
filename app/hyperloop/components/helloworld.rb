@@ -38,7 +38,7 @@ class Helloworld < Hyperloop::Component
     end
   end
 
-  def toggle_logo(evt)
+  def toggle_logo(_evt)
     # evt.prevent_default
     logo =Element['img']
     MyStore.show_field ? logo.hide('slow') : logo.show('slow')
@@ -62,18 +62,15 @@ class Helloworld < Hyperloop::Component
       TABLE(class: 'table table-hover table-condensed') do
         THEAD do
           TR(class: 'table-danger') do
-            TD(width: '33%') { "SAVED HELLO WORLD" }
+            TD(width: '33%') { 'SAVED HELLO WORLD' }
           end
         end
         TBODY do
           @helloworldmodels.each do |helloworldmodel|
-            TR(class: 'table-success') do
-              TD(width: '50%') { helloworldmodel.description }
-            end
+            DescriptionRow(descriptionparams: helloworldmodel.description)
           end
         end
       end
     end
   end
-
 end
