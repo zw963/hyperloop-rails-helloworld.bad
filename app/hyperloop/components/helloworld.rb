@@ -31,7 +31,7 @@ class Helloworld < Hyperloop::Component
     BUTTON(class: 'btn btn-info') do
       'Toggle button'
     end.on(:click) do |evt|
-      MyStore.mutate.show_field(!MyStore.show_field)
+      MyStore.toggle_field
       toggle_logo(evt)
     end
   end
