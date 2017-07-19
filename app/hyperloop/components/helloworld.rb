@@ -45,4 +45,12 @@ class Helloworld < Hyperloop::Component
   def show_text
     H1 { MyStore.state.field_value.to_s }
   end
+
+  def self.save_description
+    Helloworldmodel.create(:description => MyStore.field_value) do |result|
+      alert 'unable to save' unless result == true
+    end
+    alert("Data saved : #{MyStore.field_value}")
+    MyStore.mutate.field_value ''
+  end
 end
