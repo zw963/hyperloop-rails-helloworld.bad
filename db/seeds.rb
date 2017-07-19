@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Helloworldmodel.create(description: 'description1')
+Helloworldmodel.create(description: 'description2')
+Helloworldmodel.create(description: 'description3')
+Helloworldmodel.create(description: 'description4')
+Helloworldmodel.create(description: 'description5')
