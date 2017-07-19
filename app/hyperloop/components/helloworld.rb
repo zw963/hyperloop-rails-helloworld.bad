@@ -1,4 +1,3 @@
-
 class Helloworld < Hyperloop::Component
   before_mount do
     # any initialization particularly of state variables goes here.
@@ -18,20 +17,32 @@ class Helloworld < Hyperloop::Component
     # cleanup any thing (i.e. timers) before component is destroyed
   end
 
-  state :show_field, false
+  state show_field: false
+  state field_value: ''
 
   render(DIV) do
     show_button
-    DIV(class: 'formdiv') do
-      show_input
-      show_text
-    end if state.show_field
+    if state.show_field
+      DIV(class: 'formdiv') do
+        show_input
+        show_text
+      end
+    end
   end
 
   def show_button
     BUTTON(class: 'btn btn-info') do
       'Toggle button'
-    end.on(:click) { mutate.show_field(!state.show_field) }
+    end.on(:click) do |evt|
+      mutate.show_field(!state.show_field)
+      toggle_logo(evt)
+    end
+  end
+
+  def toggle_logo(evt)
+    # evt.prevent_default
+    logo =Element['img']
+    state.show_field ? logo.hide('slow') : logo.show('slow')
   end
 
   def show_input
@@ -42,11 +53,10 @@ class Helloworld < Hyperloop::Component
       BR {}
       SPAN { 'Or anything you want (^̮^)' }
     end
-
-    INPUT(type: :text, class: 'form-control')
+    INPUT(type: :text, class: 'form-control').on(:change) {|e| mutate.field_value(e.target.value) }
   end
 
   def show_text
-    H1 { 'input field value will be displayed here' }
+    H1 { state.field_value.to_s }
   end
-  end
+end
