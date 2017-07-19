@@ -2,6 +2,7 @@ class Helloworld < Hyperloop::Component
   before_mount do
     # any initialization particularly of state variables goes here.
     # this will execute on server (prerendering) and client.
+    @helloworldmodels = Helloworldmodel.all
   end
 
   after_mount do
@@ -25,6 +26,7 @@ class Helloworld < Hyperloop::Component
         show_text
       end
     end
+    description_table
   end
 
   def show_button
@@ -53,4 +55,25 @@ class Helloworld < Hyperloop::Component
     alert("Data saved : #{MyStore.field_value}")
     MyStore.mutate.field_value ''
   end
+
+  def description_table
+    DIV do
+      BR
+      TABLE(class: 'table table-hover table-condensed') do
+        THEAD do
+          TR(class: 'table-danger') do
+            TD(width: '33%') { "SAVED HELLO WORLD" }
+          end
+        end
+        TBODY do
+          @helloworldmodels.each do |helloworldmodel|
+            TR(class: 'table-success') do
+              TD(width: '50%') { helloworldmodel.description }
+            end
+          end
+        end
+      end
+    end
+  end
+
 end
