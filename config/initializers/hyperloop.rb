@@ -1,5 +1,4 @@
-        
-Hyperloop.configuration do |config|
-  config.transport = :simple_poller
-end
 
+Hyperloop.configuration do |config|
+  config.transport = :action_cable
+end
