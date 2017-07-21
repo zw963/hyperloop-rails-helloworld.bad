@@ -13,7 +13,7 @@ class InputBox < Hyperloop::Component
     end
 
     BUTTON(class: 'btn btn-info') { 'Save' }.on(:click) do
-      Helloworld.save_description
+      SaveDescriptionOp.run
     end
   end
 end

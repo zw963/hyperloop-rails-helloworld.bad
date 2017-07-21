@@ -47,21 +47,6 @@ class Helloworld < Hyperloop::Component
     H1 { MyStore.state.field_value.to_s }
   end
 
-  def self.save_description
-    Helloworldmodel.create(:description => MyStore.field_value) do |result|
-      alert 'unable to save' unless result == true
-    end
-
-    # 上面的代码还有另一种写法, save 方法返回一个 Promise 对象.
-    # 通过调用 then, 在 save 成功后, 会执行 callback.
-    my_todo.save(validate: false).then do |result|
-      # result is a hash with {success: ..., message: , models: ....}
-    end
-
-    alert("Data saved : #{MyStore.field_value}")
-    MyStore.mutate.field_value ''
-  end
-
   def description_table
     DIV do
       BR
