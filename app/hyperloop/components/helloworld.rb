@@ -73,7 +73,7 @@ class Helloworld < Hyperloop::Component
         end
         TBODY do
           @helloworldmodels.each do |helloworldmodel|
-            DescriptionRow(descriptionparams: helloworldmodel.description)
+            DescriptionRow(descriptionparam: helloworldmodel.description)
           end
         end
       end

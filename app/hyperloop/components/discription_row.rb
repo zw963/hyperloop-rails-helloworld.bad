@@ -1,9 +1,9 @@
 class DescriptionRow < Hyperloop::Component
-  param :descriptionparams
+  param :descriptionparam
 
   def render
     TR(class: 'table-success') do
-      TD(width: '50%') { params.descriptionparams }
+      TD(width: '50%') { params.descriptionparam }
     end
   end
 end
