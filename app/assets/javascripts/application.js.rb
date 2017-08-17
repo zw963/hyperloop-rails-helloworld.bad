@@ -1,0 +1,10 @@
+require 'react_ujs'
+require 'jquery'
+require 'jquery_ujs'
+require 'turbolinks'
+require 'opal'
+require 'opal-jquery'
+require 'autoloader'
+Autoloader.load_paths = ['components', 'models', 'operations', 'stores']
+require 'hyperloop-loader'
+require_tree '.'
